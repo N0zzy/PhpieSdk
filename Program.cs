@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using PchpSdkLibrary;
 using PchpSdkLibrary.Service;
 
@@ -24,6 +25,10 @@ class Program
             PathSdk = pathPhp;
             var dir = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName.ToReversSlash();
             PathRoot = dir.Split("/bin/Debug")[0];
+            if (!Regex.IsMatch(PathRoot, "[\\/\\\\]SharpieSdk$"))
+            {
+                PathRoot += "/SharpieSdk";
+            }
             PathRoot.WriteLn("project path:");
             AssemblyIterator();
         }
@@ -53,7 +58,7 @@ class Program
         
         private void ExtractPackages()
         {
-            string filename; 
+            string filename;
 
             manager = new Manager(filename = 
                 (PathRoot + "/obj/SharpieSdk.csproj.nuget.dgspec.json")
