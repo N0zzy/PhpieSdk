@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <Configurations>Debug;Release;ExportDebug</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Peachpie.Runtime" Version="1.1.9" />
+        <PackageReference Include="Peachpie.Library" Version="1.1.9" />
+        <PackageReference Include="Peachpie.App" Version="1.1.9" />
+    </ItemGroup>
+    
+    
+    <ItemGroup>
+        <ProjectReference Include="..\PchpSdkLibrary\PchpSdkLibrary.csproj" />
+    </ItemGroup>
+</Project>
