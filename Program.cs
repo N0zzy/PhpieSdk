@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -29,13 +31,28 @@ class Program
             {
                 PathRoot += "/SharpieSdk";
             }
+            if (File.Exists(PathRoot + "/.sdkignore"))
+            {
+                PathIgnore = File.ReadAllText(PathRoot + "/.sdkignore").ToReversSlash().Split("\r\n").ToList();
+            }
+            if (File.Exists(PathRoot + "/.sdkpath"))
+            {
+                PathCustom = File.ReadAllText(PathRoot + "/.sdkpath").ToReversSlash();
+            }
             PathRoot.WriteLn("project path:");
             AssemblyIterator();
         }
 
         private void AssemblyIterator()
         {
-            disassembler.SetPath(PathRoot, PathSdk);
+            if (PathCustom == null)
+            {
+                disassembler.SetPath(PathRoot, PathSdk);
+            }
+            else
+            {
+                disassembler.SetPath(PathCustom, PathSdk);
+            }
             
             "".WriteLn($"root path {disassembler._pathRoot}");
             "".WriteLn($"sdk path {disassembler._pathRoot}{disassembler._pathSdk}");
@@ -44,6 +61,11 @@ class Program
             
             foreach (var assembly in GetAssemblies())
             {
+                if (PathIgnore.IndexOf(assembly.GetName().Name?.Trim()) != -1)
+                {
+                    continue;
+                }
+                assembly.GetName().Name.WriteLn("add assembly:");
                 TypeIterator(assembly.GetTypes());
             }
         }
@@ -95,12 +117,22 @@ class Program
 public static class SdkExtension
 {
     public static void WriteLn(this string s, string v = "") {
-        Console.WriteLine($"[SDK] {v} " + s);
+        Console.WriteLine($"[SDK] {V(v)}" + s);
     }
         
     public static void WriteLn(this object s, string v = "")
     {
-        Console.WriteLine($"[SDK] {v} " + s.ToString());
+        Console.WriteLine($"[SDK] {V(v)}" + s.ToString());
+    }
+    
+    public static void WriteLn(this string[] s, string v = "")
+    {
+        Console.WriteLine($"[SDK] {V(v)}" + string.Join(", ", s));
+    }
+
+    private static string V(string v)
+    {
+        return v.Length <= 0 ? "" : $"{v} ";
     }
 }
 
