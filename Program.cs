@@ -8,34 +8,39 @@ using PchpSdkLibrary.Service;
 
 namespace SharpieSdk;
 
-class Program 
+class Program
 {
     public static void Main(string[] args)
     {
         new Sdk();
     }
 
-    public class Sdk: AssemblyIterator
+    private class Sdk: AssemblyIterator
     {
         /// settings - will need to create a configuration to get the sdk root
-        private readonly string pathPhp = "";
+        private readonly string _pathPhp = String.Empty;
+        private readonly string _pathBinDebug = "/bin/Debug";
+        private readonly string _sdkPath = "/.sdkpath";
+        private readonly string _sdkIgnore = "/.sdkignore";
+        private readonly string _sharpieSdk = "/SharpieSdk";
+        private readonly string _dgspec = "/obj/SharpieSdk.csproj.nuget.dgspec.json";
         
         public Sdk()
         {
-            PathSdk = pathPhp;
+            PathSdk = _pathPhp;
             var dir = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName.ToReversSlash();
-            PathRoot = dir.Split("/bin/Debug")[0];
-            if (!Regex.IsMatch(PathRoot, "[\\/\\\\]SharpieSdk$"))
+            PathRoot = dir.Split(_pathBinDebug)[0];
+            if (!Regex.IsMatch(PathRoot.ToReversSlash(), $"{_sharpieSdk}$"))
             {
-                PathRoot += "/SharpieSdk";
+                PathRoot += _sharpieSdk;
             }
-            if (File.Exists(PathRoot + "/.sdkignore"))
+            if (File.Exists(PathRoot + _sdkIgnore))
             {
-                PathIgnore = File.ReadAllText(PathRoot + "/.sdkignore").ToReversSlash().Split("\r\n").ToList();
+                PathIgnore = File.ReadAllText(PathRoot + _sdkIgnore).ToReversSlash().Split("\r\n").ToList();
             }
-            if (File.Exists(PathRoot + "/.sdkpath"))
+            if (File.Exists(PathRoot + _sdkPath))
             {
-                PathCustom = File.ReadAllText(PathRoot + "/.sdkpath").ToReversSlash();
+                PathCustom = File.ReadAllText(PathRoot + _sdkPath).ToReversSlash();
             }
             PathRoot.WriteLn("project path:");
             AssemblyIterator();
@@ -79,14 +84,8 @@ class Program
         private void ExtractPackages()
         {
             string filename;
-
-            manager = new Manager(filename = 
-                (PathRoot + "/obj/SharpieSdk.csproj.nuget.dgspec.json")
-                .ToReversSlash()
-            );
-
+            manager = new Manager(filename = (PathRoot + _dgspec).ToReversSlash());
             "".WriteLn("open nuget props: " + filename);
-            
             NugetPackagesAssemblyLoader();
         }
         

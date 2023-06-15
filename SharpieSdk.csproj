@@ -7,13 +7,12 @@
     </PropertyGroup>
     
     <ItemGroup>
-      <PackageReference Include="GLPchp.Extensions" Version="0.1.1" />
-      <PackageReference Include="GodotSharp" Version="4.0.3" />
-      <PackageReference Include="GLPchp" Version="0.2.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="Peachpie.CodeAnalysis" Version="1.1.9" />
-      <PackageReference Include="Peachpie.Library" Version="1.1.9" />
-      <PackageReference Include="Peachpie.Runtime" Version="1.1.9" />
+        <PackageReference Include="GodotSharp" Version="4.0.3" />
+        <PackageReference Include="GLPchp" Version="0.2.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Peachpie.CodeAnalysis" Version="1.1.9" />
+        <PackageReference Include="Peachpie.Library" Version="1.1.9" />
+        <PackageReference Include="Peachpie.Runtime" Version="1.1.9" />
     </ItemGroup>
 
     <ItemGroup>
