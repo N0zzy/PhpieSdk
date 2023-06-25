@@ -22,14 +22,13 @@ class Program
         private readonly string _pathBinDebug = "/bin/Debug";
         private readonly string _sdkPath = "/.sdkpath";
         private readonly string _sdkIgnore = "/.sdkignore";
-        private readonly string _sharpieSdk = "/SharpieSdk";
+        private readonly string _sharpieSdk = "SharpieSdk";
         private readonly string _dgspec = "/obj/SharpieSdk.csproj.nuget.dgspec.json";
         
         public Sdk()
         {
             PathSdk = _pathPhp;
-            var dir = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName.ToReversSlash();
-            PathRoot = dir.Split(_pathBinDebug)[0];
+            PathRoot = GetPathUtil(Directory.GetCurrentDirectory().ToReversSlash());
             if (!Regex.IsMatch(PathRoot.ToReversSlash(), $"{_sharpieSdk}$"))
             {
                 PathRoot += _sharpieSdk;
@@ -79,6 +78,21 @@ class Program
             {
                 disassembler.Add(type);
             }
+        }
+
+        private String GetPathUtil(String current) {    
+            string[] directories = Directory.GetDirectories(current, "*", SearchOption.AllDirectories);
+            string separator = "SharpieSdk/"; 
+            var s = String.Empty;
+            foreach (string directory in directories)
+            {
+                s = directory.ToReversSlash();
+                if(s.IndexOf(separator) != -1){
+                    return s.ToReversSlash().Split(new string[] { separator }, StringSplitOptions.None)[0];   
+                }
+            }
+
+            throw new Exception("Path not found");
         }
         
         private void ExtractPackages()

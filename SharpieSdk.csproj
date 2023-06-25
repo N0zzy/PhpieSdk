@@ -8,7 +8,7 @@
     
     <ItemGroup>
         <PackageReference Include="GodotSharp" Version="4.0.3" />
-        <PackageReference Include="GLPchp" Version="0.2.3" />
+        <PackageReference Include="GLPchp" Version="0.2.4" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Peachpie.CodeAnalysis" Version="1.1.9" />
         <PackageReference Include="Peachpie.Library" Version="1.1.9" />
@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SharpieSdk.Library\SharpieSdk.Library.csproj" />
+        <ProjectReference Include="..\..\Packages\SharpieSdk.Library\SharpieSdk.Library.csproj" />
     </ItemGroup>
     
 </Project>
