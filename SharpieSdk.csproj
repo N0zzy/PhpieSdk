@@ -13,11 +13,11 @@
         <PackageReference Include="Peachpie.CodeAnalysis" Version="1.1.9" />
         <PackageReference Include="Peachpie.Library" Version="1.1.9" />
         <PackageReference Include="Peachpie.Runtime" Version="1.1.9" />
-<!--        <PackageReference Include="SharpieSdk.Library" Version="*" />-->
+        <PackageReference Include="SharpieSdk.Library" Version="0.1.1" />
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\Packages\SharpieSdk.Library\SharpieSdk.Library.csproj" />
-    </ItemGroup>
+<!--    <ItemGroup>-->
+<!--        <ProjectReference Include="..\..\Packages\SharpieSdk.Library\SharpieSdk.Library.csproj" />-->
+<!--    </ItemGroup>-->
     
 </Project>
