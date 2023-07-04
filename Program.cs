@@ -18,12 +18,11 @@ class Program
     private class Sdk: AssemblyIterator
     {
         /// settings - will need to create a configuration to get the sdk root
+        private readonly string _targetFramework = "net7.0";
         private readonly string _pathPhp = String.Empty;
-        private readonly string _pathBinDebug = "/bin/Debug";
         private readonly string _sdkPath = "/.sdkpath";
         private readonly string _sdkIgnore = "/.sdkignore";
         private readonly string _sharpieSdk = "SharpieSdk";
-        private readonly string _dgspec = "/obj/SharpieSdk.csproj.nuget.dgspec.json";
         
         public Sdk()
         {
@@ -42,24 +41,42 @@ class Program
                 PathCustom = File.ReadAllText(PathRoot + _sdkPath).ToReversSlash();
             }
             PathRoot.WriteLn("project path:");
+            LoadLibrary();
             AssemblyIterator();
         }
 
+        private void LoadLibrary()
+        {
+            string osName = Environment.OSVersion.ToString();
+            string libName = osName.Contains("Windows") ? "dll" : "so";
+            var path = $"{PathRoot}/bin/Debug/{_targetFramework}";
+            "".WriteLn(path);
+            foreach (var f in Directory.GetFiles(path, $"*.{libName}"))
+            {
+                try
+                {
+                    Assembly.LoadFile(f);
+                }
+                catch (Exception)
+                {
+                    //ignore
+                }
+            }
+        }
+        
         private void AssemblyIterator()
         {
             if (PathCustom == null)
             {
-                disassembler.SetPath(PathRoot, PathSdk);
+                disassembler.SetPath(PathRoot.Trim(), PathSdk.Trim());
             }
             else
             {
-                disassembler.SetPath(PathCustom, PathSdk);
+                disassembler.SetPath(PathCustom.Trim(), PathSdk.Trim());
             }
-            
-            "".WriteLn($"root path {disassembler._pathRoot}");
-            "".WriteLn($"sdk path {disassembler._pathRoot}{disassembler._pathSdk}");
 
-            ExtractPackages();
+            "".WriteLn($"root path:  {disassembler._pathRoot}");
+            "".WriteLn($"sdk path: {disassembler._pathRoot}{disassembler._pathSdk}");
             
             foreach (var assembly in GetAssemblies())
             {
@@ -68,7 +85,14 @@ class Program
                     continue;
                 }
                 assembly.GetName().Name.WriteLn("add assembly:");
-                TypeIterator(assembly.GetTypes());
+                try
+                {
+                    TypeIterator(assembly.GetTypes());
+                }
+                catch (Exception)
+                {
+                    "".WriteLn($"Unable to load types form {assembly.GetName().Name}");
+                }
             }
         }
         
@@ -82,45 +106,16 @@ class Program
 
         private String GetPathUtil(String current) {    
             string[] directories = Directory.GetDirectories(current, "*", SearchOption.AllDirectories);
-            string separator = "SharpieSdk/"; 
+            string separator = _sharpieSdk + "/"; 
             var s = String.Empty;
             foreach (string directory in directories)
             {
                 s = directory.ToReversSlash();
-                if(s.IndexOf(separator) != -1){
+                if(s.IndexOf(separator, StringComparison.Ordinal) != -1){
                     return s.ToReversSlash().Split(new string[] { separator }, StringSplitOptions.None)[0];   
                 }
             }
-
             throw new Exception("Path not found");
-        }
-        
-        private void ExtractPackages()
-        {
-            string filename;
-            manager = new Manager(filename = (PathRoot + _dgspec).ToReversSlash());
-            "".WriteLn("open nuget props: " + filename);
-            NugetPackagesAssemblyLoader();
-        }
-        
-        private void NugetPackagesAssemblyLoader()
-        {
-            foreach (var nuget in manager.NugetCollection.Distinct().ToList())
-            {
-                var name = "";
-                try
-                {
-                    name = nuget.Split("|")[0];
-                    Assembly.Load(name);
-                    "".WriteLn("add nuget package: " + nuget);
-                }
-                catch (Exception e)
-                {
-                    "".WriteLn($"failed nuget package: {name}");
-                   Console.WriteLine($"[Error] {e.Message}]");
-                }
-                
-            }
         }
     }
 }
