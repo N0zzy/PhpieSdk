@@ -4,15 +4,13 @@
         <TargetFramework>net7.0</TargetFramework>
         <Configurations>Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
     </PropertyGroup>
-    
-    <ItemGroup>
-        <PackageReference Include="SharpieSdk.Library" Version="0.2.0" />
-    </ItemGroup>
     
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Avalonia" Version="11.0.0-rc2.2" />
         <PackageReference Include="Avalonia.Desktop" Version="11.0.0-rc2.2" />
+        <PackageReference Include="SharpieSdk.Library" Version="0.2.0" />
     </ItemGroup>
 </Project>
