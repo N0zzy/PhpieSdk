@@ -1,4 +1,4 @@
-namespace SharpieSdk
+namespace PhpieSdk
 {
 
     internal interface ITest
