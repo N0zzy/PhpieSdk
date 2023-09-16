@@ -8,10 +8,8 @@
     </PropertyGroup>
     
     <ItemGroup>
-<!--        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />-->
-<!--        <PackageReference Include="Avalonia" Version="11.0.0" />-->
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-<!--        <PackageReference Include="PhpieSdk.Library" Version="0.2.0" />-->
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
+        <PackageReference Include="PhpieSdk.Library" Version="0.3.0" />
     </ItemGroup>
     
     <ItemGroup>
