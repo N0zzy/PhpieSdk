@@ -18,6 +18,8 @@ public class Program
             sdkName = ".sdk",
             sdkPath = ".sdkpath",
             sdkIgnore = ".sdkignore",
+            
+            isMakeSdkList = true
         })
         .Execute();
     }
