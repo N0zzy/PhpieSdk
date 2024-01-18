@@ -1,20 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <OutputType>Exe</OutputType>
         <Configurations>Debug</Configurations>
-        <Platforms>AnyCPU</Platforms>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <TargetFramework>net7.0</TargetFramework>
+        <Platforms>x64;x86;arm64</Platforms>
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.4" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
-        <PackageReference Include="PhpieSdk.Library" Version="0.3.2" />
+        <ProjectReference Include="E:\Godot4\Godot\GDProject\Packages\PhpieSdk.Library\PhpieSdk.Library.csproj" />
     </ItemGroup>
     
-<!--    <ItemGroup>-->
-<!--        <ProjectReference Include="E:\Godot4\Godot\GDProject\Packages\PhpieSdk.Library\PhpieSdk.Library.csproj" />-->
-<!--     </ItemGroup>-->
-    
+    <ItemGroup>
+      <PackageReference Include="Avalonia" Version="11.0.7" />
+      <PackageReference Include="Avalonia.Desktop" Version="11.0.7" />
+    </ItemGroup>
+
 </Project>
