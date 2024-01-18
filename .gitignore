@@ -2,6 +2,7 @@
 .vscode
 .idea
 .sdk
+.sdkfiles
 bin
 obj
 PhpieTest.cs
