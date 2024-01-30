@@ -1,8 +1,7 @@
 .vs
 .vscode
 .idea
-.sdk
 .sdkfiles
 bin
 obj
-PhpieTest.cs
+global.json
