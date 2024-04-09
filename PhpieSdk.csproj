@@ -15,46 +15,10 @@
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.1.0-beta1" />
         <PackageReference Include="Avalonia.Desktop" Version="11.1.0-beta1" />
+        <PackageReference Include="PhpieSdk.Library" Version="1.0.0" />
     </ItemGroup>
     
-    <ItemGroup>
-      <ProjectReference Include="..\PhpieSdk.Library\PhpieSdk.Library.csproj" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Content Include=".git\config" />
-      <Content Include=".git\description" />
-      <Content Include=".git\HEAD" />
-      <Content Include=".git\hooks\applypatch-msg.sample" />
-      <Content Include=".git\hooks\commit-msg.sample" />
-      <Content Include=".git\hooks\fsmonitor-watchman.sample" />
-      <Content Include=".git\hooks\post-update.sample" />
-      <Content Include=".git\hooks\pre-applypatch.sample" />
-      <Content Include=".git\hooks\pre-commit.sample" />
-      <Content Include=".git\hooks\pre-merge-commit.sample" />
-      <Content Include=".git\hooks\pre-push.sample" />
-      <Content Include=".git\hooks\pre-rebase.sample" />
-      <Content Include=".git\hooks\pre-receive.sample" />
-      <Content Include=".git\hooks\prepare-commit-msg.sample" />
-      <Content Include=".git\hooks\push-to-checkout.sample" />
-      <Content Include=".git\hooks\sendemail-validate.sample" />
-      <Content Include=".git\hooks\update.sample" />
-      <Content Include=".git\index" />
-      <Content Include=".git\info\exclude" />
-      <Content Include=".git\logs\HEAD" />
-      <Content Include=".git\logs\refs\heads\main" />
-      <Content Include=".git\logs\refs\remotes\origin\HEAD" />
-      <Content Include=".git\objects\pack\pack-137d07b09a6d8274afc577c9f4e994f3dcd495a9.idx" />
-      <Content Include=".git\objects\pack\pack-137d07b09a6d8274afc577c9f4e994f3dcd495a9.pack" />
-      <Content Include=".git\objects\pack\pack-137d07b09a6d8274afc577c9f4e994f3dcd495a9.rev" />
-      <Content Include=".git\packed-refs" />
-      <Content Include=".git\refs\heads\main" />
-      <Content Include=".git\refs\remotes\origin\HEAD" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include=".git\objects\info\" />
-      <Folder Include=".git\refs\tags\" />
-    </ItemGroup>
-
+<!--    <ItemGroup>-->
+<!--      <ProjectReference Include="..\PhpieSdk.Library\PhpieSdk.Library.csproj" />-->
+<!--    </ItemGroup>-->
 </Project>
