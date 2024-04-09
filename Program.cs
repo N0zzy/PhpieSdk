@@ -8,6 +8,7 @@ public class Program
     public static void Main(string[] args)
     {
         new PhpieSdkRunner().Run();
+        //new PhpieSdkRunner().Benchmark();
     }
     
 }
@@ -23,14 +24,15 @@ public class PhpieSdkRunner
         
         List<string> Ignore = new List<string>()
         {
-            
+            "System.Security.Cryptography",
+            "System.Collections.Concurrent"
         };
 
         new PhpSdkGenerator(new PhpSdkSettings()
         {
-            OutputPath = "C:\\",
+            OutputPath = "C:/",
             LibsPath = null,
-            IsViewMessageAboutLoaded = true,
+            IsViewMessageAboutLoaded = false,
             IsUppercaseNames = false,
             IgnoreList = Ignore,
             PreloadList = PreloadList
