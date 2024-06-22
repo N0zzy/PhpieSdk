@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PhpieSdk.Library;
 
 namespace PhpieSdk;
@@ -10,7 +11,6 @@ public class Program
         new PhpieSdkRunner().Run();
         //new PhpieSdkRunner().Benchmark();
     }
-    
 }
 public class PhpieSdkRunner
 {
@@ -21,8 +21,7 @@ public class PhpieSdkRunner
             typeof(System.Uri)
         };
         
-        
-        List<string> Ignore = new List<string>()
+        List<string> IgnoreList = new List<string>()
         {
             "System.Security.Cryptography",
             "System.Collections.Concurrent"
@@ -30,12 +29,14 @@ public class PhpieSdkRunner
 
         new PhpSdkGenerator(new PhpSdkSettings()
         {
-            OutputPath = "C:/",
-            LibsPath = null,
-            IsViewMessageAboutLoaded = false,
+            OutputPath = "C:\\",
+            LibsPath = "E:\\git\\PhpieSdk\\bin\\Debug\\net7.0\\",
+            IsCached = false,
+            IsViewMessageAboutLoaded = true,
             IsUppercaseNames = false,
-            IgnoreList = Ignore,
-            PreloadList = PreloadList
+            IgnoreList = IgnoreList,
+            PreloadList = PreloadList,
+            EventType = "\\ClrEvent" 
         }).Execute();
     }
 
